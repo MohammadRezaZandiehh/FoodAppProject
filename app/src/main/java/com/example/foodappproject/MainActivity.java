@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void vegetarianFood(List<Posts> postsList) {
-        recyclerViewMain = findViewById(R.id.rv_popular);
+        recyclerViewMain = findViewById(R.id.rv_vegetarian);
         recyclerViewMain.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
         mainAdapter = new VegetarianAdapter(postsList, MainActivity.this);
         recyclerViewMain.setAdapter(mainAdapter);
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void fastFood(List<Posts> postsList) {
-        recommended_recycler = findViewById(R.id.recommended_recycler);
+        recommended_recycler = findViewById(R.id.fastFood_recycler);
         recommended_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
         recommendedAdapter = new FastFoodAdapter(postsList, MainActivity.this);
         recommended_recycler.setAdapter(recommendedAdapter);
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void barbecue(List<Posts> postsList) {
         allMenuAdapter = new BarbecueAdapter(MainActivity.this, postsList);
-        recyclerViewAllMenu = findViewById(R.id.rv_allMenu);
+        recyclerViewAllMenu = findViewById(R.id.rv_barbecue);
         recyclerViewAllMenu.setAdapter(allMenuAdapter);
         recyclerViewAllMenu.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
     }
