@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/recycler_bg2">
+
+    <ImageView
+        android:id="@+id/barbecueImageView"
+        android:layout_width="86dp"
+        android:layout_height="95dp"
+        android:src="@drawable/popular1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/barbecueName_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="barbecue"
+        app:layout_constraintStart_toEndOf="@+id/barbecueImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/barbecueNote_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="delicious"
+        app:layout_constraintStart_toStartOf="@+id/barbecueName_tv"
+        app:layout_constraintTop_toBottomOf="@+id/barbecueName_tv" />
+
+    <ImageView
+        android:id="@+id/barbecueStarImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/barbecueNote_tv"
+        app:layout_constraintTop_toBottomOf="@+id/barbecueNote_tv"
+        app:srcCompat="@drawable/ic_mdi_star_rate" />
+
+    <TextView
+        android:id="@+id/barbecue_rating_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="3.9"
+        app:layout_constraintBottom_toBottomOf="@+id/barbecueStarImageView"
+        app:layout_constraintStart_toEndOf="@+id/barbecueStarImageView"
+        app:layout_constraintTop_toTopOf="@+id/barbecueStarImageView" />
+
+
+    <TextView
+        android:id="@+id/barbecue_deliverytime"
+        android:layout_width="40dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/time_bg"
+        android:gravity="center"
+        android:text="45 mins"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/barbecue_rating_tv"
+        app:layout_constraintStart_toEndOf="@+id/barbecue_rating_tv"
+        app:layout_constraintTop_toTopOf="@+id/barbecue_rating_tv" />
+
+    <TextView
+        android:id="@+id/barbecue_delivery_charge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Free Delivery"
+        app:layout_constraintBottom_toBottomOf="@+id/barbecue_deliverytime"
+        app:layout_constraintStart_toEndOf="@+id/barbecue_deliverytime"
+        app:layout_constraintTop_toTopOf="@+id/barbecue_deliverytime" />
+
+    <TextView
+        android:id="@+id/barbecue_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="166"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
