@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         // FastFood
         service.getAllFastFood()
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<PixabayPosts>() {
 
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        //barbecueFood
         service.getAllBarbecue()
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<PixabayPosts>() {
 
