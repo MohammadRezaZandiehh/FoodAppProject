@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     BarbecueAdapter allMenuAdapter;
     RecyclerView recyclerViewAllMenu;
-    Button button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
