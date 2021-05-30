@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.foodappproject.adapter.BarbecueAdapter;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     BarbecueAdapter allMenuAdapter;
     RecyclerView recyclerViewAllMenu;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
