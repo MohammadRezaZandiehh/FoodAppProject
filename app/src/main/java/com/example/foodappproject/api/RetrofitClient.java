@@ -1,6 +1,7 @@
 package com.example.foodappproject.api;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
@@ -14,6 +15,8 @@ public class RetrofitClient {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
                     .build();
         }
         return retrofit;

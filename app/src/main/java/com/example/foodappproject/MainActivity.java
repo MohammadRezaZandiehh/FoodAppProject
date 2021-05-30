@@ -16,8 +16,14 @@ import com.example.foodappproject.api.Service;
 import com.example.foodappproject.model.PixabayPosts;
 import com.example.foodappproject.model.Posts;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     BarbecueAdapter allMenuAdapter;
     RecyclerView recyclerViewAllMenu;
 
+    Disposable disposable;
+    Service service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,50 +48,77 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RetrofitClient retrofitClient = new RetrofitClient();
-        Service service = retrofitClient.getRetrofitInstance()
+        service = retrofitClient.getRetrofitInstance()
                 .create(Service.class);
 
         //VegetarianFood
-        service.getVegetarianFood().enqueue(new Callback<PixabayPosts>() {
-            @Override
-            public void onResponse(Call<PixabayPosts> call, Response<PixabayPosts> response) {
-                vegetarianFood(response.body().getHits());
-            }
+        service.getVegetarianFood()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<PixabayPosts>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable = d;
 
-            @Override
-            public void onFailure(Call<PixabayPosts> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error !", Toast.LENGTH_SHORT).show();
+                    }
 
-            }
-        });
+                    @Override
+                    public void onSuccess(@NonNull PixabayPosts pixabayPosts) {
+                        vegetarianFood(pixabayPosts.getHits());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Toast.makeText(MainActivity.this, "Error !", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         // FastFood
-        service.getAllFastFood().enqueue(new Callback<PixabayPosts>() {
-            @Override
-            public void onResponse(Call<PixabayPosts> call, Response<PixabayPosts> response) {
-                fastFood(response.body().getHits());
-            }
+        service.getAllFastFood()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<PixabayPosts>() {
 
-            @Override
-            public void onFailure(Call<PixabayPosts> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error !", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable = d;
 
-        //barbecueFood
-        service.getAllBarbecue().enqueue(new Callback<PixabayPosts>() {
-            @Override
-            public void onResponse(Call<PixabayPosts> call, Response<PixabayPosts> response) {
-                barbecue(response.body().getHits());
-            }
+                    }
 
-            @Override
-            public void onFailure(Call<PixabayPosts> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error !", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onSuccess(@NonNull PixabayPosts pixabayPosts) {
+                        fastFood(pixabayPosts.getHits());
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Toast.makeText(MainActivity.this, "Error !", Toast.LENGTH_SHORT).show();
 
+                    }
+                });
+//
+//        //barbecueFood
+        service.getAllBarbecue()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<PixabayPosts>() {
+
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull PixabayPosts pixabayPosts) {
+                        barbecue(pixabayPosts.getHits());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Toast.makeText(MainActivity.this, "Error !", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
 
     public void vegetarianFood(List<Posts> postsList) {
@@ -106,5 +141,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewAllMenu = findViewById(R.id.rv_barbecue);
         recyclerViewAllMenu.setAdapter(allMenuAdapter);
         recyclerViewAllMenu.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 }
