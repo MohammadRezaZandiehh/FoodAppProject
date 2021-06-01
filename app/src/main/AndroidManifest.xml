@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodAppProject">
-        <activity android:name=".FoodDetailsActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".foodDetails.FoodDetailsActivity"></activity>
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

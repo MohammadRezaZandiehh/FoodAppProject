@@ -1,4 +1,4 @@
-package com.example.foodappproject.api;
+package com.example.foodappproject.model.api;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

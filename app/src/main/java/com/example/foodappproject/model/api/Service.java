@@ -1,11 +1,8 @@
-package com.example.foodappproject.api;
+package com.example.foodappproject.model.api;
 
 import com.example.foodappproject.model.PixabayPosts;
 
-import java.util.List;
-
 import io.reactivex.Single;
-import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface Service {

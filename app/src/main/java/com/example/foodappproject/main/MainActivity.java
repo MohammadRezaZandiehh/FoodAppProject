@@ -1,22 +1,21 @@
-package com.example.foodappproject;
+package com.example.foodappproject.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.foodappproject.adapter.BarbecueAdapter;
-import com.example.foodappproject.adapter.VegetarianAdapter;
-import com.example.foodappproject.adapter.FastFoodAdapter;
-import com.example.foodappproject.api.RetrofitClient;
-import com.example.foodappproject.api.Service;
+import com.example.foodappproject.R;
+import com.example.foodappproject.main.adapter.BarbecueAdapter;
+import com.example.foodappproject.main.adapter.VegetarianAdapter;
+import com.example.foodappproject.main.adapter.FastFoodAdapter;
+import com.example.foodappproject.model.api.RetrofitClient;
+import com.example.foodappproject.model.api.Service;
 import com.example.foodappproject.model.PixabayPosts;
 import com.example.foodappproject.model.Posts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.SingleObserver;
@@ -24,9 +23,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 

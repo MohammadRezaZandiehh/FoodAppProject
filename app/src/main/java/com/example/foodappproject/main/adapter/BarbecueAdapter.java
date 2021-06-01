@@ -1,4 +1,4 @@
-package com.example.foodappproject.adapter;
+package com.example.foodappproject.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.foodappproject.FoodDetailsActivity;
+import com.example.foodappproject.foodDetails.FoodDetailsActivity;
 import com.example.foodappproject.R;
 import com.example.foodappproject.model.Posts;
 

@@ -1,4 +1,4 @@
-package com.example.foodappproject;
+package com.example.foodappproject.foodDetails;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.example.foodappproject.R;
+import com.example.foodappproject.main.MainActivity;
 
 public class FoodDetailsActivity extends AppCompatActivity {
 
