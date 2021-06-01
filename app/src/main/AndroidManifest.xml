@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodAppProject">
         <activity android:name=".foodDetails.FoodDetailsActivity"></activity>
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

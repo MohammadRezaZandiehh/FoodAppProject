@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodappproject.R;
-import com.example.foodappproject.main.MainActivity;
+import com.example.foodappproject.view.MainActivity;
 
 public class FoodDetailsActivity extends AppCompatActivity {
 

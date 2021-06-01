@@ -1,4 +1,4 @@
-package com.example.foodappproject.main;
+package com.example.foodappproject.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.foodappproject.R;
-import com.example.foodappproject.main.adapter.BarbecueAdapter;
-import com.example.foodappproject.main.adapter.VegetarianAdapter;
-import com.example.foodappproject.main.adapter.FastFoodAdapter;
+import com.example.foodappproject.view.adapter.BarbecueAdapter;
+import com.example.foodappproject.view.adapter.VegetarianAdapter;
+import com.example.foodappproject.view.adapter.FastFoodAdapter;
 import com.example.foodappproject.model.api.RetrofitClient;
 import com.example.foodappproject.model.api.Service;
 import com.example.foodappproject.model.PixabayPosts;
@@ -37,20 +37,24 @@ public class MainActivity extends AppCompatActivity {
 
     Disposable disposable;
     Service service;
+    MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RetrofitClient retrofitClient = new RetrofitClient();
-        service = retrofitClient.getRetrofitInstance()
-                .create(Service.class);
+//        RetrofitClient retrofitClient = new RetrofitClient();
+//        service = retrofitClient.getRetrofitInstance()
+//                .create(Service.class);
+
+        mainViewModel = new MainViewModel(new RetrofitClient());
 
         //VegetarianFood
-        service.getVegetarianFood()
+
+        mainViewModel.vegetarianData()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())  
                 .subscribe(new SingleObserver<PixabayPosts>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         // FastFood
-        service.getAllFastFood()
+        mainViewModel.fastFoodData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<PixabayPosts>() {
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 //
 //        //barbecueFood
-        service.getAllBarbecue()
+        mainViewModel.barbecueData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<PixabayPosts>() {

@@ -1,4 +1,4 @@
-package com.example.foodappproject.main.adapter;
+package com.example.foodappproject.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
