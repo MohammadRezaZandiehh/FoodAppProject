@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.foodappproject.R;
@@ -21,7 +23,9 @@ import java.util.List;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +39,13 @@ public class MainActivity extends AppCompatActivity {
     BarbecueAdapter allMenuAdapter;
     RecyclerView recyclerViewAllMenu;
 
-    Disposable disposable;
+    //    Disposable disposable;
     Service service;
     MainViewModel mainViewModel;
+
+    ProgressBar progressBarMain;
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +57,17 @@ public class MainActivity extends AppCompatActivity {
 //                .create(Service.class);
 
         mainViewModel = new MainViewModel(new RetrofitClient());
+        progressBarMain = findViewById(R.id.progressBarMain);
 
         //VegetarianFood
 
         mainViewModel.vegetarianData()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())  
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<PixabayPosts>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        disposable = d;
-
+                        compositeDisposable.add(d);
                     }
 
                     @Override
@@ -81,8 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        disposable = d;
-
+                        compositeDisposable.add(d);
                     }
 
                     @Override
@@ -105,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        disposable = d;
+                        compositeDisposable.add(d);
                     }
 
                     @Override
@@ -119,6 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+
+
+        compositeDisposable.add(mainViewModel.getProgressBarSubject()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mustShowProgressbar -> progressBarMain.setVisibility(mustShowProgressbar ? View.VISIBLE : View.GONE)));
+//                  mustShowProgressBar -> progressBar.setVisibility(mustShowProgressBar ? View.VISIBLE : View.GONE
     }
 
     public void vegetarianFood(List<Posts> postsList) {
@@ -146,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        disposable.dispose();
+        if (compositeDisposable != null)
+            compositeDisposable.clear();
     }
 }
